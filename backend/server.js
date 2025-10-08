@@ -39,10 +39,6 @@ app.get("/", (req, res) => {
   res.send("Hello World 1232");
 });
 
-// app.get("/api/transactions", async (req, res) => {
-
-// });
-
 app.post("/api/transactions", async (req, res) => {
   //titl, amount, category, user_id
   try {
