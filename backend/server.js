@@ -2,18 +2,14 @@
 import express from "express";
 import dotenv from "dotenv";
 import {sql} from "./config/db.js";
+import rateLimiter from "./middleware/rateLimit.js";
 
 dotenv.config();
 
 const app = express();
 
+app.use(rateLimiter); //apply rate limiter to all the routes
 app.use(express.json()); //middleware to parse json body
-
-//our custom simple middleware
-// app.use((req, res, next) => {
-//   console.log("Hey we hit a req, the method is ", req.method);
-//   next();
-// });
 
 const PORT = process.env.PORT || 5001;
 
