@@ -95,8 +95,8 @@ app.delete("/api/transactions/:id", async (req, res) => {
     `;
 
     if (result.length === 0) {
-      return res.status(200).json({
-        status: "200",
+      return res.status(404).json({
+        status: "404",
         message: "Transaction not found",
         transaction: [],
       });
@@ -109,6 +109,44 @@ app.delete("/api/transactions/:id", async (req, res) => {
     });
   } catch (error) {
     console.log("Error deleting the transaction", error);
+    res.status(500).json({status: "500", message: "Internal Server Error"});
+  }
+});
+
+app.get("/api/transactions/summary/:userId", async (req, res) => {
+  try {
+    const {userId} = req.params;
+    //total balance
+    const balanceResult = await sql`
+    SELECT COALESCE(SUM(amount), 0) AS balance
+    FROM transactions
+    WHERE user_id = ${userId}
+    `;
+
+    //money coming in
+    const incomeResult = await sql`
+    SELECT COALESCE(SUM(amount), 0) AS income
+    FROM transactions
+    WHERE user_id = ${userId} AND amount > 0
+    `;
+    //money going out
+    const expenseResult = await sql`
+    SELECT COALESCE(SUM(amount), 0) AS expenses
+    FROM transactions
+    WHERE user_id = ${userId} AND amount < 0
+    `;
+
+    res.status(200).json({
+      status: "200",
+      message: "Summary fetched successfully",
+      summary: {
+        balance: balanceResult[0].balance,
+        income: incomeResult[0].income,
+        expenses: expenseResult[0].expenses,
+      },
+    });
+  } catch (error) {
+    console.log("Error getting the transactions summary", error);
     res.status(500).json({status: "500", message: "Internal Server Error"});
   }
 });
