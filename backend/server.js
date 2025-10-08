@@ -39,13 +39,34 @@ app.get("/", (req, res) => {
   res.send("Hello World 1232");
 });
 
+app.get("/api/transactions/:userId", async (req, res) => {
+  try {
+    const {userId} = req.params;
+
+    const transactions = await sql`
+      SELECT * FROM transactions WHERE user_id = ${userId} ORDER BY create_at DESC
+    `;
+
+    res.status(200).json({
+      status: "200",
+      message: "Transactions fetched successfully",
+      transactions: transactions  ,
+    });
+  } catch (error) {
+    console.log("Error getting the transactions", error);
+    res.status(500).json({status: "500", message: "Internal Server Error"});
+  }
+});
+
 app.post("/api/transactions", async (req, res) => {
   //titl, amount, category, user_id
   try {
     const {title, amount, category, user_id} = req.body;
 
     if (!title || amount === undefined || !category || !user_id) {
-      return res.status(400).json({message: "All fields are required"});
+      return res
+        .status(400)
+        .json({status: "400", message: "All fields are required"});
     }
 
     const transaction = await sql`
@@ -54,15 +75,14 @@ app.post("/api/transactions", async (req, res) => {
       RETURNING *
     `;
     console.log("Transaction created:", transaction);
-    res
-      .status(201)
-      .json({
-        message: "Transaction created successfully",
-        transaction: transaction[0],
-      });
+    res.status(201).json({
+      status: "201",
+      message: "Transaction created successfully",
+      transaction: transaction[0],
+    });
   } catch (error) {
     console.log("Error creating the transaction", error);
-    res.status(500).json({message: "Server Error"});
+    res.status(500).json({status: "500", message: "Internal Server Error"});
   }
 });
 
