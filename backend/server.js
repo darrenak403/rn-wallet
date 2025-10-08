@@ -50,7 +50,7 @@ app.get("/api/transactions/:userId", async (req, res) => {
     res.status(200).json({
       status: "200",
       message: "Transactions fetched successfully",
-      transactions: transactions  ,
+      transactions,
     });
   } catch (error) {
     console.log("Error getting the transactions", error);
@@ -82,6 +82,33 @@ app.post("/api/transactions", async (req, res) => {
     });
   } catch (error) {
     console.log("Error creating the transaction", error);
+    res.status(500).json({status: "500", message: "Internal Server Error"});
+  }
+});
+
+app.delete("/api/transactions/:id", async (req, res) => {
+  try {
+    const {id} = req.params;
+
+    const result = await sql`
+      DELETE FROM transactions WHERE id = ${id} RETURNING *
+    `;
+
+    if (result.length === 0) {
+      return res.status(200).json({
+        status: "200",
+        message: "Transaction not found",
+        transaction: [],
+      });
+    }
+
+    res.status(200).json({
+      status: "200",
+      message: "Transaction deleted successfully",
+      transaction: result[0],
+    });
+  } catch (error) {
+    console.log("Error deleting the transaction", error);
     res.status(500).json({status: "500", message: "Internal Server Error"});
   }
 });
