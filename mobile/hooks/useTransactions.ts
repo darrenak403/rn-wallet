@@ -21,7 +21,7 @@ export const useTransactions = (userId: string) => {
     try {
       const response = await fetch(`${API_URL}/transactions/${userId}`);
       const data = await response.json();
-      setTransactions(data);
+      setTransactions(data.transactions);
     } catch (error) {
       console.error("Error fetching transactions:", error);
     }
@@ -51,7 +51,7 @@ export const useTransactions = (userId: string) => {
     }
   }, [fetchTransactions, fetchSummary, userId]);
 
-  const deleteTransaction = async (id: string) => {
+  const deleteTransaction = async (id: number) => {
     try {
       const response = await fetch(`${API_URL}/transactions/${id}`, {
         method: "DELETE",
