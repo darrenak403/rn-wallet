@@ -1,7 +1,10 @@
-import { Text, View } from "react-native";
+import {Link} from "expo-router";
+import {Text, View} from "react-native";
 
 export default function Index() {
   return (
+    //View = div
+    //Text = p, span
     <View
       style={{
         flex: 1,
@@ -9,7 +12,8 @@ export default function Index() {
         alignItems: "center",
       }}
     >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+      <Text>Edit app/index.tsx to edit this screen</Text>
+      <Link href="/about">Go to About</Link>
     </View>
   );
 }
