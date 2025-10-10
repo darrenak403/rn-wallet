@@ -22,7 +22,7 @@ export const useTransactions = (userId: string) => {
       const response = await fetch(`${API_URL}/transactions/${userId}`);
       const data = await response.json();
       setTransactions(data.transactions);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching transactions:", error);
     }
   }, [userId]);
@@ -32,7 +32,7 @@ export const useTransactions = (userId: string) => {
       const response = await fetch(`${API_URL}/transactions/summary/${userId}`);
       const data = await response.json();
       setSummary(data.summary);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error fetching summary:", error);
     }
   }, [userId]);
@@ -44,7 +44,7 @@ export const useTransactions = (userId: string) => {
     try {
       // can be run in parallel
       await Promise.all([fetchTransactions(), fetchSummary()]);
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error loading data:", error);
     } finally {
       setIsLoading(false);
