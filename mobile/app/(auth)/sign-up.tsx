@@ -36,10 +36,18 @@ export default function SignUpScreen() {
       // Set 'pendingVerification' to true to display second form
       // and capture OTP code
       setPendingVerification(true);
-    } catch (err) {
-      // See https://clerk.com/docs/custom-flows/error-handling
-      // for more info on error handling
-      console.error(JSON.stringify(err, null, 2));
+    } catch (err: any) {
+      console.log(err);
+      if (err.errors && err.errors[0]?.code === "form_email_already_exists") {
+        setError("An account with this email already exists.");
+      } else if (
+        err.errors &&
+        err.errors[0]?.code === "form_password_too_weak"
+      ) {
+        setError("Password is too weak. Please choose a stronger password.");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
     }
   };
 
@@ -107,10 +115,12 @@ export default function SignUpScreen() {
       extraScrollHeight={150}
     >
       <View style={styles.container}>
-        <Image
-          source={require("../../assets/images/revenue-i2.png")}
-          style={styles.illustration}
-        />
+        <View style={{alignItems: "center"}}>
+          <Image
+            source={require("../../assets/images/revenue-i2.png")}
+            style={styles.illustration}
+          />
+        </View>
         <Text style={styles.title}>Create Account</Text>
 
         {error ? (
