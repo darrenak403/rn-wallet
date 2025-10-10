@@ -11,7 +11,7 @@ interface Transaction {
   title: string;
   amount: string;
   category: string;
-  created_at: string;
+  create_at: string;
 }
 
 // Component props interface
@@ -63,7 +63,8 @@ export const TransactionItem: React.FC<TransactionItemProps> = ({
             {Math.abs(parseFloat(item.amount)).toFixed(2)}
           </Text>
           <Text style={styles.transactionDate}>
-            {formatDate(item.created_at)}
+            {formatDate(item.create_at)}
+            {/* {item.created_at} */}
           </Text>
         </View>
       </TouchableOpacity>
