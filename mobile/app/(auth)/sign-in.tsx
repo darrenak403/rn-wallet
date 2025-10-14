@@ -19,32 +19,30 @@ export default function Page() {
   const onSignInPress = async () => {
     if (!isLoaded) return;
 
-    // Start the sign-in process using the email and password provided
+    setError("");
     try {
-      const signInAttempt = await signIn.create({
+      const result = await signIn.create({
         identifier: emailAddress,
         password,
       });
 
-      // If sign-in process is complete, set the created session as active
-      // and redirect the user
-      if (signInAttempt.status === "complete") {
-        await setActive({session: signInAttempt.createdSessionId});
+      if (result.status === "complete") {
+        await setActive({session: result.createdSessionId});
         router.replace("/");
       } else {
-        // If the status isn't complete, check why. User might need to
-        // complete further steps.
-        console.error(JSON.stringify(signInAttempt, null, 2));
+        console.log(result);
       }
     } catch (err: any) {
-      console.error(err);
-      if (err.errors && err.errors[0]?.code === "form_identifier_not_found") {
-        setError("No user found with this email address.");
-      } else if (
-        err.errors &&
-        err.errors[0]?.code === "form_password_incorrect"
-      ) {
-        setError("Incorrect password. Please try again.");
+      console.log(JSON.stringify(err, null, 2)); // để debug
+
+      if (err.errors?.[0]?.code === "too_many_requests") {
+        setError(
+          "Too many attempts. Please wait a few minutes before trying again."
+        );
+      } else if (err.errors?.[0]?.code === "form_identifier_not_found") {
+        setError("No account found with that email address.");
+      } else if (err.errors?.[0]?.code === "form_password_incorrect") {
+        setError("Incorrect password.");
       } else {
         setError("Something went wrong. Please try again.");
       }

@@ -26,7 +26,7 @@ app.use(rateLimiter); //apply rate limiter to all the routes
 app.use(express.json()); //middleware to parse json body
 
 const PORT = process.env.PORT || 5001;
- 
+
 app.get("/api/health", (req, res) => {
   res.status(200).json({status: "ok"});
 });

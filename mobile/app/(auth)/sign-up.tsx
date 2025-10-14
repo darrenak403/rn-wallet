@@ -45,7 +45,12 @@ export default function SignUpScreen() {
         err.errors[0]?.code === "form_password_too_weak"
       ) {
         setError("Password is too weak. Please choose a stronger password.");
+      } else if (err.errors && err.errors[0]?.code === "too_many_requests") {
+        setError(
+          "Too many attempts. Please wait a few minutes before trying again."
+        );
       } else {
+        console.log(JSON.stringify(err, null, 2));
         setError("Something went wrong. Please try again.");
       }
     }
