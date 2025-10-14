@@ -7,7 +7,6 @@ A modern expense tracking mobile application built with React Native and Expo fo
 <div align="center">
   <img src="screenshot/login.jpg" width="200" alt="Home Screen" />
   <img src="screenshot/verify_email.jpg" width="200" alt="Transactions List" />
-  <img src="screenshot/home_no_transactions.jpg" width="200" alt="Add Transaction" />
   <img src="screenshot/home.jpg" width="200" alt="Categories" />
   <img src="screenshot/add_transactions.jpg" width="200" alt="Summary View" />
 </div>
