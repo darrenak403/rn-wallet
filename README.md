@@ -5,11 +5,11 @@ A modern expense tracking mobile application built with React Native and Expo fo
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="assets/screenshot/login.jpg" width="200" alt="Home Screen" />
-  <img src="assets/screenshot/verify_email.jpg" width="200" alt="Transactions List" />
-  <img src="assets/screenshot/home_no_transactions.jpg" width="200" alt="Add Transaction" />
-  <img src="assets/screenshot/home.jpg" width="200" alt="Categories" />
-  <img src="assets/screenshot/add_transactions.jpg" width="200" alt="Summary View" />
+  <img src="../Wallet/mobile/assets/screenshot/login.jpg" width="200" alt="Home Screen" />
+  <img src="../Wallet/mobile/assets/screenshot/verify_email.jpg" width="200" alt="Transactions List" />
+  <img src="../Wallet/mobile/assets/screenshot/home_no_transactions.jpg" width="200" alt="Add Transaction" />
+  <img src="../Wallet/mobile/assets/screenshot/home.jpg" width="200" alt="Categories" />
+  <img src="../Wallet/mobile/assets/screenshot/add_transactions.jpg" width="200" alt="Summary View" />
 </div>
 
 ## 🚀 Features
