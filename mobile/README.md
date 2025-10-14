@@ -1,50 +1,153 @@
-# Welcome to your Expo app 👋
+# 💰 Wallet - React Native Expense Tracker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern expense tracking mobile application built with React Native and Expo for learning purposes. Track your income, expenses, and manage your finances with an intuitive interface.
 
-## Get started
+## 📱 Screenshots
 
-1. Install dependencies
+<div align="center">
+  <img src="assets/screenshot/login.jpg" width="200" alt="Home Screen" />
+  <img src="assets/screenshot/verify.jpg" width="200" alt="Transactions List" />
+  <img src="assets/screenshot/home_no_transactions.jpg" width="200" alt="Add Transaction" />
+  <img src="assets/screenshot/home_transactions.jpg" width="200" alt="Categories" />
+  <img src="assets/screenshot/add_transactions.jpg" width="200" alt="Summary View" />
+</div>
+
+## 🚀 Features
+
+- ✅ User Authentication (Clerk)
+- ✅ Add Income/Expense Transactions
+- ✅ Categorize Transactions
+- ✅ Real-time Balance Summary
+- ✅ Transaction History
+- ✅ Delete Transactions
+- ✅ Responsive UI Design
+- ✅ Cross-platform (iOS/Android/Web)
+
+## 🛠️ Tech Stack
+
+**Frontend:**
+
+- React Native
+- Expo
+- TypeScript
+- Expo Router (File-based routing)
+- Clerk (Authentication)
+
+**Backend:**
+
+- Node.js
+- Express.js
+- Neon Database (PostgreSQL)
+- REST API
+
+**Deployment:**
+
+- Backend: Render.com
+- Mobile: Expo Go / EAS Build
+
+## 📂 Project Structure
+
+```
+mobile/
+├── app/
+│   ├── (auth)/          # Authentication screens
+│   ├── (root)/          # Main app screens
+│   └── _layout.tsx      # Root layout
+├── components/          # Reusable components
+├── hooks/              # Custom hooks
+├── constants/          # App constants
+├── assets/             # Images, fonts, styles
+└── lib/                # Utilities
+
+backend/
+├── src/
+│   ├── routes/         # API routes
+│   ├── config/         # Database config
+│   └── middleware/     # Custom middleware
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+- Expo CLI
+- Expo Go app (for testing)
+
+### Installation
+
+1. **Clone the repository**
 
    ```bash
-   npm install
+   git clone <repository-url>
+   cd Wallet
    ```
 
-2. Start the app
+2. **Setup Backend**
 
    ```bash
+   cd backend
+   npm install
+   cp .env.example .env
+   # Add your database URL and other environment variables
+   npm run dev
+   ```
+
+3. **Setup Mobile App**
+
+   ```bash
+   cd mobile
+   npm install
+   cp .env.example .env
+   # Add your Clerk publishable key
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. **Scan QR code** with Expo Go app to run on your device
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 🔧 Environment Variables
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+**Backend (.env):**
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+DATABASE_URL=your_neon_database_url
+NODE_ENV=development
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+**Mobile (.env):**
 
-## Learn more
+```
+EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+## 📱 Usage
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+1. **Sign Up/Sign In** with your email
+2. **Add transactions** by tapping the "+" button
+3. **Choose category** (Food, Transportation, Income, etc.)
+4. **View balance summary** on the home screen
+5. **Manage transactions** with swipe-to-delete
 
-## Join the community
+## 🎯 Learning Objectives
 
-Join our community of developers creating universal apps.
+This project demonstrates:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- React Native development with TypeScript
+- State management with custom hooks
+- API integration and data fetching
+- User authentication implementation
+- Database design and operations
+- Mobile app deployment strategies
+
+## 🤝 Contributing
+
+This is a learning project. Feel free to fork and experiment!
+
+## 📝 License
+
+This project is for educational purposes only.
+
+---
+
+Built with ❤️ using React Native & Expo
